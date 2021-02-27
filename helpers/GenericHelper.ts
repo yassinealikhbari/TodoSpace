@@ -13,11 +13,9 @@ export class GenericHelper {
 
     /**
      * Check if a string parameter is null or empty
-     * @param {string} value
+     * @param {string} str
      * */
-    public static isStringNullOrEmpty = (value: string) : Boolean =>{
-        let result: Boolean = false;
-        result = value === null || value.length === 0;
-        return result;
+    public static isStringNullOrEmpty = (str?: string) : Boolean =>{
+        return (!str || 0 === str.length); 
     }
 }

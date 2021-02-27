@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from "react-native";
 import ITodoItem from "./../models/ITodoItem";
 
 export type IPressHandlerback = (id: number) => void;
@@ -18,7 +24,6 @@ export default class TodoItem extends React.Component<ITodoItemProps> {
   public render() {
     const { item } = this.props;
     return (
-      //   <View style={[styles.container, this.props.style]}>
       <TouchableWithoutFeedback
         onLongPress={() => this.props.pressHandler(item.id)}
       >
@@ -26,7 +31,6 @@ export default class TodoItem extends React.Component<ITodoItemProps> {
           <Text>{item.text}</Text>
         </View>
       </TouchableWithoutFeedback>
-      //   </View>
     );
   }
 }
@@ -34,14 +38,12 @@ export default class TodoItem extends React.Component<ITodoItemProps> {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: "#ffd369",
-    position: "relative",
-    width: "90%",
+    width: "95%",
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 15,
     paddingBottom: 15,
     marginTop: 10,
-    // marginBottom: 10,
     borderRadius: 5,
     alignSelf: "center",
   },
