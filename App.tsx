@@ -5,8 +5,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  SafeAreaView,
   Platform,
   StatusBar,
   ImagePropTypes,
@@ -57,6 +55,18 @@ export default class App extends React.Component<IAppProps, IAppState> {
     const { items } = this.state;
     return (
       <View style={styles.container}>
+        <Text
+          style={{
+            marginTop: 15,
+            color: "#fff",
+            textTransform: "uppercase",
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 15,
+          }}
+        >
+          My Todo Space
+        </Text>
         <ScrollView style={styles.scrollView}>
           {items.map((item: ITodoItem, index: number) => {
             return (
@@ -70,6 +80,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
               ></TodoItem>
             );
           })}
+          <View style={{ height: 100 }} />
         </ScrollView>
         <FloatingButton
           pressHandler={this.addClickHandler}
@@ -88,7 +99,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
     const newItem: ITodoItem = {
       id: id,
-      text: "I'm a new item",
+      text: "I'm a new item " + id,
       status: 0,
     };
     const newItems: ITodoItem[] = [...this.state.items, newItem];
@@ -96,7 +107,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
   };
 
   private handLongPress = (id: number) => {
-    alert(id);
+    const newItems = this.state.items?.filter((i: ITodoItem) => i.id !== id);
+    this.setState({ items: newItems });
   };
 }
 
@@ -112,5 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
+    paddingBottom: 50,
   },
 });
