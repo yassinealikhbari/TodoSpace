@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import ITodoItem from "./../models/ITodoItem";
 import Swipeable from "react-native-swipeable";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
@@ -50,32 +44,32 @@ export default class TodoItem extends React.Component<ITodoItemProps> {
     super(prop);
   }
 
-  private rightButtons = [
-    <TouchableHighlight
-      onPress={() => this.props.completeItem(this.props.item.id)}
-    >
-      <View style={[styles.rightButton, { backgroundColor: "green" }]}>
-        <AntDesign name="check" size={24} color="#fff" />
-      </View>
-    </TouchableHighlight>,
+  //   private rightButtons = [
+  //     <TouchableHighlight
+  //       onPress={() => this.props.completeItem(this.props.item.id)}
+  //     >
+  //       <View style={[styles.rightButton, { backgroundColor: "green" }]}>
+  //         <AntDesign name="check" size={24} color="#fff" />
+  //       </View>
+  //     </TouchableHighlight>,
 
-    <TouchableHighlight
-      onPress={() => this.props.deleteItem(this.props.item.id)}
-    >
-      <View style={[styles.rightButton, { backgroundColor: "red" }]}>
-        <MaterialIcons name="delete-forever" size={24} color="#fff" />
-      </View>
-    </TouchableHighlight>,
-  ];
+  //     <TouchableHighlight
+  //       onPress={() => this.props.deleteItem(this.props.item.id)}
+  //     >
+  //       <View style={[styles.rightButton, { backgroundColor: "red" }]}>
+  //         <MaterialIcons name="delete-forever" size={24} color="#fff" />
+  //       </View>
+  //     </TouchableHighlight>,
+  //   ];
 
   public render() {
     const { item } = this.props;
     return (
-      <Swipeable rightButtons={this.rightButtons}>
-        <View style={[styles.item, this.props.style]}>
-          <Text>{item.text}</Text>
-        </View>
-      </Swipeable>
+      // <Swipeable rightButtons={this.rightButtons} style={{}}>
+      <View style={[styles.item, this.props.style]}>
+        <Text>{item.text}</Text>
+      </View>
+      // </Swipeable>
     );
   }
 }
