@@ -1,6 +1,14 @@
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacityBase,
+  TouchableWithoutFeedbackBase,
+  TouchableHighlightBase,
+  Touchable,
+} from "react-native";
 
 export type IPressHandlerback = () => void;
 
@@ -17,11 +25,11 @@ export default class FloatingButton extends React.Component<IFloatingButtonProps
   public render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <TouchableWithoutFeedback onPress={this.props.pressHandler}>
+        <TouchableHighlight onPress={this.props.pressHandler}>
           <View style={styles.floatingButton}>
             <AntDesign name="plus" size={24} color="#fff"></AntDesign>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableHighlight>
       </View>
     );
   }

@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import ITodoItem from "./models/ITodoItem";
 import { GenericHelper } from "./helpers/GenericHelper";
-// import { SwipeListView, SwipeRow } from "react-native-swipe-list-view";
 
 export interface IAppProps {}
 export interface IAppState {
@@ -75,7 +74,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
               <AntDesign
                 onPress={this.closeModal}
                 style={{
-                  bottom: 20,
+                  top: 10,
                   paddingLeft: 30,
                   alignSelf: "flex-end",
                 }}
@@ -92,7 +91,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
                   minHeight: 40,
                   maxHeight: 140,
                   width: "90%",
-                  // borderColor: "gray",
                   backgroundColor: "#F7F7F7",
                   borderWidth: 0,
                   marginBottom: 20,
@@ -125,8 +123,11 @@ export default class App extends React.Component<IAppProps, IAppState> {
           {items.map((item: ITodoItem, index: number) => {
             return (
               <TodoItem
-                pressHandler={(id: number) => {
-                  this.handLongPress(id);
+                deleteItem={(id: number) => {
+                  this.deleteItem(id);
+                }}
+                completeItem={(id: number) => {
+                  this.completeItem(id);
                 }}
                 key={index}
                 item={item}
@@ -136,43 +137,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
           })}
           <View style={{ height: 100 }} />
         </ScrollView>
-        {/* <SwipeListView
-          keyExtractor={(item, index) => item.id.toString()}
-          data={items}
-          renderItem={(rowData) => (
-            <SwipeRow
-              disableRightSwipe={true}
-              disableLeftSwipe={false}
-              leftOpenValue={20 + rowData.item.id * 5}
-              rightOpenValue={-100}
-            >
-              <View>
-                <Text
-                  style={{
-                    marginTop: 15,
-                    color: "#fff",
-                    textTransform: "uppercase",
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    marginBottom: 15,
-                  }}
-                >
-                  Right Hidden
-                </Text>
-              </View>
-              <View>
-                <TodoItem
-                  pressHandler={(id: number) => {
-                    this.handLongPress(id);
-                  }}
-                  key={rowData.index}
-                  item={rowData.item}
-                  style={{}}
-                ></TodoItem>
-              </View>
-            </SwipeRow>
-          )}
-        /> */}
+
         {!this.state.modalVisible && (
           <FloatingButton
             pressHandler={this.openModal}
@@ -186,9 +151,13 @@ export default class App extends React.Component<IAppProps, IAppState> {
   private openModal = () => this.setState({ modalVisible: true });
   private closeModal = () => this.setState({ modalVisible: false });
 
-  private handLongPress = (id: number) => {
+  private deleteItem = (id: number) => {
     const newItems = this.state.items?.filter((i: ITodoItem) => i.id !== id);
     this.setState({ items: newItems });
+  };
+
+  private completeItem = (id: number) => {
+    alert("set item as complete");
   };
 
   private onChangeText = (text: string) => {
@@ -243,7 +212,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#B1CDCE",
     borderRadius: 20,
-    padding: 35,
+    paddingBottom: 35,
     paddingRight: 15,
     paddingLeft: 15,
     alignItems: "center",
